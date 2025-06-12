@@ -9,9 +9,15 @@ dotenv.config(); // Cargar variables de entorno desde .env
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-  url: process.env.DATABASE_URL,
-  autoLoadEntities: true,
-  synchronize: true,
+      url: process.env.DATABASE_URL,
+      ssl: true,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      },
+      autoLoadEntities: true,
+      synchronize: true,
     }),
     NotificationsModule,
   ],
